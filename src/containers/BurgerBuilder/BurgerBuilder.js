@@ -19,7 +19,20 @@ class BurgerBuilder extends Component {
             cheese: 0,
             meat: 0
         },
-        totalPrice: 4
+        totalPrice: 0,
+        purchasable: false
+    }
+
+    updatePurchaseState = (ingredients) => {
+        const sum = Object.keys(ingredients)
+            .map(igKey => {
+                return ingredients[igKey]
+            })
+            .reduce((total, item) => {
+                return total + item
+            }, 0)
+
+        this.setState({ purchasable: sum > 0 })
     }
 
     addIngredientHandler = typeIngredient => {
@@ -38,10 +51,15 @@ class BurgerBuilder extends Component {
             ingredients: updatedIngredients,
             totalPrice: newPrice
         })
+
+        this.updatePurchaseState(updatedIngredients)
     }
 
     removeIngredientHandler = typeIngredient => {
         const oldCount = this.state.ingredients[typeIngredient]
+        if (oldCount <= 0)
+            return
+
         const updatedCounted = oldCount - 1
         const updatedIngredients = {
             ...this.state.ingredients
@@ -56,15 +74,27 @@ class BurgerBuilder extends Component {
             ingredients: updatedIngredients,
             totalPrice: newPrice
         })
+        this.updatePurchaseState(updatedIngredients)
+
     }
 
     render() {
+        const disabledInfo = {
+            ...this.state.ingredients
+        }
+        for (const key in disabledInfo) {
+            disabledInfo[key] = disabledInfo[key] <= 0
+        }
+        console.log(disabledInfo)
         return (
             <Hoc>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
-                    ingredientAdded={this.addIngredientHandler} 
-                    ingredientRemoved={this.removeIngredientHandler} />
+                    ingredientAdded={this.addIngredientHandler}
+                    ingredientRemoved={this.removeIngredientHandler}
+                    disabled={disabledInfo}
+                    price={this.state.totalPrice}
+                    purchasable={this.state.purchasable} />
             </Hoc>
         )
     }
