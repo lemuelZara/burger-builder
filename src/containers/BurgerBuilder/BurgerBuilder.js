@@ -101,7 +101,7 @@ class BurgerBuilder extends Component {
         for (const key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
-        console.log(disabledInfo)
+        
         return (
             <Hoc>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
