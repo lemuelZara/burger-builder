@@ -1,20 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './Toolbar.module.css'
-import BurgerLogo from '../../Logo/Logo'
-import NavigationItems from '../NavigationItems/NavigationItems'
-import DrawerToogle from '../SideDrawer/DrawerToogle/DrawerToogle'
+import classes from './Toolbar.css';
+import Logo from '../../Logo/Logo';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 
-const Toolbar = props => (
-    <header className={styles.Toolbar}>
-        <DrawerToogle clicked={props.drawerToogleClick}/>
-        <div className={styles.Logo}>
-            <BurgerLogo />
+const toolbar = ( props ) => (
+    <header className={classes.Toolbar}>
+        <DrawerToggle clicked={props.drawerToggleClicked} />
+        <div className={classes.Logo}>
+            <Logo />
         </div>
-        <nav className={styles.DesktopOnly}>
+        <nav className={classes.DesktopOnly}>
             <NavigationItems />
         </nav>
     </header>
-)
+);
 
-export default Toolbar
+export default toolbar;
