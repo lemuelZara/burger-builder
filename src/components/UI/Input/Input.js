@@ -5,15 +5,29 @@ import classes from './Input.module.css'
 const Input = props => {
     let inputElement = null
 
-    switch (props.inputType) {
+    switch (props.elementType) {
         case ('input'):
-            inputElement = <input className={classes.InputElement} {...props} />
+            inputElement = <input
+                className={classes.InputElement}
+                {...props.elementConfig}
+                value={props.value} />
             break
-        case ('textarea'):
-            inputElement = <textarea className={classes.InputElement} {...props} />
+        case ('select'):
+            inputElement = <select
+                className={classes.InputElement}
+                value={props.value}>
+                {props.elementConfig.options.map(op => (
+                    <option value={op.value}>
+                        {op.displayValue}
+                    </option>
+                ))}
+            </select>
             break
         default:
-            inputElement = <input className={classes.InputElement} {...props} />
+            inputElement = <input
+                className={classes.InputElement}
+                {...props.elementConfig}
+                value={props.value} />
             break
     }
 
