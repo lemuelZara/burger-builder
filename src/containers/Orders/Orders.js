@@ -11,31 +11,6 @@ class Orders extends Component {
         loading: true
     }
 
-    componentDidMount() {
-        axios
-            .get('/orders.json')
-            .then(reponse => {
-                const fetchedOrders = []
-
-                for (let key in reponse.data) {
-                    fetchedOrders.push({
-                        ...reponse.data[key],
-                        id: key
-                    })
-                }
-
-                this.setState({
-                    loading: false,
-                    orders: fetchedOrders
-                })
-            })
-            .catch(err => {
-                this.setState({
-                    loading: false
-                })
-            })
-    }
-
     render() {
         return (
             <div>
