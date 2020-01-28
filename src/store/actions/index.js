@@ -11,5 +11,6 @@ export {
 } from './order'
 
 export {
+    authSuccess,
     auth
 } from './auth'
