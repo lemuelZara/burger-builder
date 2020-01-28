@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
+import classes from './Auth.module.css'
 
 class Auth extends Component {
     state = {
@@ -36,12 +37,39 @@ class Auth extends Component {
             }
         }
     }
+
+    checkValidity = (value, rules) => {
+        let isValid = true
+
+        if (rules.required) isValid = value.trim() !== '' && isValid
+        if (rules.minLength) isValid = value.length >= rules.minLength && isValid
+        if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid
+
+        return isValid
+    }
+
+    inputChangedHandler = (event, controlName) => {
+        const controls = {
+            ...this.state.controls,
+            [controlName]: {
+                ...this.state.controls[controlName],
+                value: event.target.value,
+                valid: this.checkValidity(
+                    event.target.value, this.state.controls[controlName].validation
+                ),
+                touched: true
+            }
+        }
+
+        this.setState({ controls })
+    }
+
     render() {
         const formElementsArray = []
-        for (let key in this.state.orderForm) {
+        for (let key in this.state.controls) {
             formElementsArray.push({
                 id: key,
-                config: this.state.orderForm[key]
+                config: this.state.controls[key]
             })
         }
 
@@ -58,7 +86,7 @@ class Auth extends Component {
         ))
 
         return (
-            <div>
+            <div className={classes.Auth}>
                 <form>
                     {form}
                     <Button btnType="Success">Log In</Button>
