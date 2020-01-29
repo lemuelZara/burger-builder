@@ -54,6 +54,11 @@ export const auth = (email, password, isSignup) => {
             .post(url, authData)
             .then(response => {
                 console.log(response)
+
+                const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+
+                localStorage.setItem('token', response.data.idToken)
+                localStorage.setItem('expirationDate', expirationDate)
                 dispatch(authSuccess(
                     response.data.idToken,
                     response.data.localId
@@ -67,7 +72,7 @@ export const auth = (email, password, isSignup) => {
 }
 
 export const setAuthRedirectPath = path => {
-    return {    
+    return {
         type: actionTypes.SET_AUTH_REDIRECT_PATH,
         path
     }
