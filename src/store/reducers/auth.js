@@ -10,6 +10,10 @@ const initialState = {
     loading: false
 }
 
+export const authLogout = (state, action) => {
+    return updatedObject(state, { token: null, userId: null })
+}
+
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionType.AUTH_START:
@@ -31,6 +35,8 @@ export const reducer = (state = initialState, action) => {
                 err: action.err,
                 loading: false
             })
+        case actionType.AUTH_LOGOUT:
+            return authLogout(state, action)
         default:
             return state
     }
