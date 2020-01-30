@@ -1,5 +1,5 @@
 import * as actionType from '../actions/actionTypes'
-import { updatedObject } from '../utility'
+import { updatedObject } from '../../shared/utility'
 
 // Recebo os dados vindo do store/actions
 
