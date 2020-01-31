@@ -6,7 +6,7 @@ const Order = props => {
     const ingredients = []
 
     for (let ingredientName in props.ingredients) {
-        console.log(ingredientName)
+        
         ingredients.push({
             name: ingredientName,
             value: props.ingredients[ingredientName]

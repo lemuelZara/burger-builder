@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 import * as actionTypes from './actionTypes'
-import { authLogout } from '../reducers/auth'
 
 export const authStart = () => {
     return {
@@ -56,8 +55,7 @@ export const auth = (email, password, isSignup) => {
         }
         axios
             .post(url, authData)
-            .then(response => {
-                console.log(response)
+            .then(response => {              
 
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
 
