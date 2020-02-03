@@ -3,9 +3,7 @@ import axios from 'axios'
 import * as actionTypes from './actionTypes'
 
 export const authStart = () => {
-    return {
-        type: actionTypes.AUTH_START
-    }
+    return { type: actionTypes.AUTH_START }
 }
 
 export const authSuccess = (token, userId) => {
@@ -17,27 +15,22 @@ export const authSuccess = (token, userId) => {
 }
 
 export const authFail = err => {
-    return {
-        type: actionTypes.AUTH_FAIL,
-        err
-    }
+    return { type: actionTypes.AUTH_FAIL, err }
 }
 
 export const logout = () => {
     /* localStorage.removeItem('token')
     localStorage.removeItem('expirationDate')
     localStorage.removeItem('userId') */
-    return {
-        type: actionTypes.AUTH_INITIATE_LOGOUT
-    }
+    return { type: actionTypes.AUTH_INITIATE_LOGOUT }
 }
 
-export const checkAuthTimeout = time => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logout())
-        }, time * 1000)
-    }
+export const logoutSucceed = () => {
+    return { type: actionTypes.AUTH_LOGOUT }
+}
+
+export const checkAuthTimeout = expirationTime => {
+    return { type: actionTypes.AUTH_CHECK_TIMEOUT, expirationTime }
 }
 
 export const auth = (email, password, isSignup) => {
@@ -55,7 +48,7 @@ export const auth = (email, password, isSignup) => {
         }
         axios
             .post(url, authData)
-            .then(response => {              
+            .then(response => {
 
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
 
