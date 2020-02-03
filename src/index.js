@@ -12,7 +12,7 @@ import registerServiceWorker from './registerServiceWorker';
 import burgerBuilderReducer from './store/reducers/burgerBuilder'
 import orderReducer from './store/reducers/order'
 import { reducer as authReducer } from './store/reducers/auth'
-import { logoutSaga } from './store/sagas/auth'
+import { watchAuth } from './store/sagas/index'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -29,7 +29,7 @@ const store = createStore(
     composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 )
 
-sagaMiddleware.run(logoutSaga)
+sagaMiddleware.run(watchAuth)
 
 const app = (
     <Provider store={store}>
