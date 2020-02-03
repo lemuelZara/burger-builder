@@ -12,9 +12,9 @@ import {
 } from '../actions/index'
 
 export function* logoutSaga(action) {
-    yield yield localStorage.removeItem('token')
-    yield yield localStorage.removeItem('expirationDate')
-    yield yield localStorage.removeItem('userId')
+    yield localStorage.removeItem('token')
+    yield localStorage.removeItem('expirationDate')
+    yield localStorage.removeItem('userId')
 
     yield put(logoutSucceed())
 }
