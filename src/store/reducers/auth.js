@@ -2,6 +2,7 @@ import * as actionType from '../actions/actionTypes'
 import { updatedObject } from '../../shared/utility'
 
 // Recebo os dados vindo do store/actions
+console.log('(Reducers)')
 
 const initialState = {
     token: null,

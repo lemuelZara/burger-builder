@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes'
 
+console.log('(Actions)')
+
 export const authStart = () => {
     return { type: actionTypes.AUTH_START }
 }
@@ -32,6 +34,7 @@ export const checkAuthTimeout = expirationTime => {
 }
 
 export const auth = (email, password, isSignup) => {
+    
     return {
         type: actionTypes.AUTH_USER,
         email,

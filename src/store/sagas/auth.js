@@ -27,6 +27,7 @@ export function* checkAuthTimeoutSaga(action) {
 export function* authUserSaga(action) {
     yield put(authStart())
 
+    console.log(action.email)
     const authData = {
         email: action.email,
         password: action.password,
