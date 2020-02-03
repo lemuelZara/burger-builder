@@ -29,7 +29,9 @@ const store = createStore(
     composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 )
 
+console.log(watchAuth)
 sagaMiddleware.run(watchAuth)
+console.log(sagaMiddleware.run(watchAuth))
 
 const app = (
     <Provider store={store}>
