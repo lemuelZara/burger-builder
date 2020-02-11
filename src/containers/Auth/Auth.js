@@ -59,7 +59,7 @@ const Auth = props => {
             })
         })
 
-        setControls({ updateControls })
+        setControls(updateControls)
     }
 
     const submitHandler = event => {
